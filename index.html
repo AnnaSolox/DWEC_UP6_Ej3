@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Práctica de Eventos JS</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    button { margin: 5px; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-    input { padding: 6px; border-radius: 4px; }
-    #log { margin-top: 20px; border: 1px solid #ccc; padding: 10px; min-height: 80px; background: #f8f8f8; }
-    #scrollBox { margin-top: 10px; border:1px solid #aaa; height: 100px; overflow:auto; padding:5px; background:#fff;}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 6px;
+      border-radius: 4px;
+    }
+
+    #log {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      min-height: 80px;
+      background: #f8f8f8;
+    }
+
+    #scrollBox {
+      margin-top: 10px;
+      border: 1px solid #aaa;
+      height: 100px;
+      overflow: auto;
+      padding: 5px;
+      background: #fff;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Práctica de Eventos JavaScript</h1>
@@ -59,31 +92,31 @@
 
     // Añadir un evento "click" a btnClick que muestre "Botón clicado"
     btnClick.onclick = () => {
-      alert('Botón clicado');
+      appendLog('Botón clicado');
     }
-    
+
     // Añadir un evento "dblclick" a btnDbl que muestre "Botón doble clicado"
     btnDbl.onclick = () => {
-      alert('Botón doble clicado');
+      appendLog('Botón doble clicado');
     }
-    
+
     // Añadir eventos "mouseenter" y "mouseleave" a btnMouse que muestren "Entró el mouse" y "Salió el mouse"
     btnMouse.onmouseenter = () => {
-      btnMouse.innerHTML = 'Entró el mouse';
+      appendLog('Entró el mouse');
     }
 
     btnMouse.onmouseleave = () => {
-      btnMouse.innerHTML = 'Salió el mouse';
+      appendLog('Salió el mouse');
     }
 
     // === TECLADO ===
     const nombre = document.getElementById('nombre');
 
     // Añadir evento "input" para mostrar lo que el alumno escribe en el log
-    function mostrarEnLog(input){
+    function mostrarEnLog(input) {
       appendLog(input.value);
     }
-    
+
     // Añadir evento "keydown" global que muestre la tecla presionada
     document.addEventListener('keydown', (tecla) => {
       appendLog('Tecla presionada: ' + tecla.key);
@@ -94,8 +127,20 @@
     const apellido = document.getElementById('apellido');
 
     // Evento "submit" que muestre el valor de apellido y evite enviar
-    
+    miForm.onsubmit = (evento) => {
+      evento.preventDefault();
+      if (apellido.value !== "") {
+        appendLog('Apellido enviado: ' + apellido.value);
+      } else {
+        appendLog('Apellido enviado: (vacío)');
+      }
+    }
+
     // Evento "reset" que muestre "Formulario reiniciado"
+
+    miForm.onreset = () => {
+      appendLog('Formulario reiniciado');
+    }
 
     // === VENTANA / SCROLL ===
     const scrollBox = document.getElementById('scrollBox');
@@ -106,4 +151,5 @@
   </script>
 
 </body>
+
 </html>
