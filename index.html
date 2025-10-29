@@ -58,12 +58,12 @@
 
   <!-- Input -->
   <div style="margin-top:10px;">
-    <input type="text" id="nombre" oninput="mostrarEnLog(this)" placeholder="Escribe tu nombre">
+    <input type="text" id="nombre" placeholder="Escribe tu nombre">
   </div>
 
   <!-- Formulario -->
   <form id="miForm" style="margin-top:10px;">
-    <input type="text" id="apellido" oninput="mostrarEnLog(this)" placeholder="Apellido">
+    <input type="text" id="apellido" placeholder="Apellido">
     <button type="submit">Enviar</button>
     <button type="reset">Reset</button>
   </form>
@@ -113,8 +113,8 @@
     const nombre = document.getElementById('nombre');
 
     // Añadir evento "input" para mostrar lo que el alumno escribe en el log
-    function mostrarEnLog(input) {
-      appendLog(input.value);
+    nombre.oninput = () => {
+      appendLog('El alumno escribe: ' + nombre.value);
     }
 
     // Añadir evento "keydown" global que muestre la tecla presionada
@@ -146,8 +146,10 @@
     const scrollBox = document.getElementById('scrollBox');
 
     // Evento "scroll" que muestre "Scroll en el área"
+    scrollBox.onscroll = () => { appendLog('Scroll en el área');}
 
     // Evento "resize" de la ventana que muestre "Ventana redimensionada"
+    window.onresize = () => { appendLog('Ventana redimensionada'); }
   </script>
 
 </body>
